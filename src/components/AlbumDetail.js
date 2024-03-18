@@ -1,5 +1,5 @@
 //單張專輯卡的細節
-import { StyleSheet, View, Text, Image, Button, Linking } from "react-native";
+import { StyleSheet, View, Text, Image, Pressable, Linking } from "react-native";
 
 const AlbumDetail = ( {album} ) => {
     return (
@@ -17,17 +17,14 @@ const AlbumDetail = ( {album} ) => {
             </View>
             {/*專輯圖片*/}
             <View style={styles.cardSectionStyle}>
-                <Image 
-                    style={styles.imageStyle}
-                    source={{uri: album.image}}
-                />
+                {/*圖片包裹在可觸控式元件內 => 點擊圖片可前往其他頁面*/}
+                <Pressable onPress={() => Linking.openURL(album.url)}>
+                  <Image 
+                      style={styles.imageStyle}
+                      source={{uri: album.image}}
+                  />
+                </Pressable>
             </View>
-            {/*專輯按鈕。樣式為預設，無法自行調整*/}
-            <Button 
-              onPress={() => Linking.openURL(album.url)}
-              title="More Detail"
-              color="#E53711"
-            />
         </View>
     );
 }
