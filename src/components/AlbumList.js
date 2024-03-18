@@ -1,53 +1,16 @@
 //多張專輯卡的統整
-import { Text, FlatList, SectionList, StyleSheet } from 'react-native';
+import { FlatList } from 'react-native';
 import AlbumDetail from "./AlbumDetail";
-import BestSellerDetail from "./BestSellerDetail";
-import sections from "../json/album_section.json"
 
-const AlbumList = () => {
-  const renderSectionHeader = ({ section }) => (
-    <>
-      <Text style={styles.sectionHeader}>{section.title}</Text>
-      {section.horizontal ? (
-        <FlatList
-          horizontal={true}
-          data={section.data}
-          renderItem={({ item }) => <BestSellerDetail album={item} />}
-          showsHorizontalScrollIndicator={false}
-          keyExtractor={ item => item.title }
-        />
-      ) : null}
-    </>
-  );
-  const renderItem = ({ item, section }) => {
-    if (section.horizontal) {
-      return null;
-    }
-    return <AlbumDetail album={item} />
-  };
-
+const AlbumList = ( {list} ) => {
+  const renderItem = ( {item} ) => <AlbumDetail album={item} />;
   return (
-    <SectionList 
-      sections={sections} // json資料
-      contentContainerStyle={{ paddingHorizontal: 10 }} //元件樣式
-      stickySectionHeadersEnabled={false}
-      showsHorizontalScrollIndicator={false}
-      renderSectionHeader={renderSectionHeader}
-      renderItem={renderItem}
-      keyExtractor={ item => item.title }
-    />
+    <FlatList
+      data={list} // 由 props 傳來的 json 陣列
+      renderItem={renderItem} // 將陣列中的資料逐筆往下傳
+      keyExtractor={item => item.title} // 替陣列中每筆資料分配專屬的 key
+    />    
   );
 };
-
-const styles = StyleSheet.create({
-  sectionHeader: {
-    fontWeight: "600",
-    fontSize: 18,
-    paddingTop: 20,
-    paddingBottom: 5,
-    paddingLeft: 10,
-    textTransform: "uppercase",
-  },
-})
 
 export default AlbumList;

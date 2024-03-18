@@ -1,9 +1,9 @@
 import { StyleSheet, Text, View } from 'react-native';
 
-const Header = () => {
+const Header = ( {title} ) => {
   return (
     <View style={styles.headerStyle}>
-        <Text style={styles.textStyle}>Albums</Text>
+        <Text style={styles.textStyle}>{title}</Text>
     </View>
   );
 }
@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     height: 60,
-    //陰影設定
+    /*陰影設定*/
     shadowColor: "#000",
     shadowOffset: {width: 0, height: 2},
     shadowOpacity: 0.2,

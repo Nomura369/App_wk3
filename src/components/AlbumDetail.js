@@ -1,8 +1,7 @@
 //單張專輯卡的細節
-import { StyleSheet, View, Text, Image } from "react-native";
+import { StyleSheet, View, Text, Image, Button, Linking } from "react-native";
 
-const AlbumDetail = props => {
-    let { album } = props; // let album = props.album; 從 AlbumList.js 傳過來的
+const AlbumDetail = ( {album} ) => {
     return (
         <View style={styles.cardContainerStyle}>
             {/*專輯簡介*/}
@@ -23,6 +22,12 @@ const AlbumDetail = props => {
                     source={{uri: album.image}}
                 />
             </View>
+            {/*專輯按鈕。樣式為預設，無法自行調整*/}
+            <Button 
+              onPress={() => Linking.openURL(album.url)}
+              title="More Detail"
+              color="#E53711"
+            />
         </View>
     );
 }
