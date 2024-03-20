@@ -1,7 +1,7 @@
 //單張專輯卡的細節
-import { StyleSheet, View, Text, Image, Pressable, Linking } from "react-native";
+import { StyleSheet, View, Text, Image, TouchableOpacity } from "react-native";
 
-const AlbumDetail = ( {album} ) => {
+const AlbumDetail = ( {album, navigation} ) => {
     return (
         <View style={styles.cardContainerStyle}>
             {/*專輯簡介*/}
@@ -17,13 +17,13 @@ const AlbumDetail = ( {album} ) => {
             </View>
             {/*專輯圖片*/}
             <View style={styles.cardSectionStyle}>
-                {/*圖片包裹在可觸控式元件內 => 點擊圖片可前往其他頁面*/}
-                <Pressable onPress={() => Linking.openURL(album.url)}>
+                {/*圖片包裹在可觸控式元件內 => 點擊圖片可導覽往其他頁面*/}
+                <TouchableOpacity onPress={() => navigation.navigate("Detail", album)}>
                   <Image 
                       style={styles.imageStyle}
                       source={{uri: album.image}}
                   />
-                </Pressable>
+                </TouchableOpacity>
             </View>
         </View>
     );

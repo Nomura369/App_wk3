@@ -1,25 +1,28 @@
-import { StyleSheet, StatusBar, SafeAreaView } from 'react-native';
-import Header from "./src/components/Header";
-import AlbumList from "./src/components/AlbumList";
-import albumData from "./src/json/albums.json"
+import 'react-native-gesture-handler';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import AlbumScreen from './src/screens/AlbumScreen';
+import DetailScreen from './src/screens/DetailScreen';
+
+const Stack = createStackNavigator();
 
 const App = () => {
   return (
-    <SafeAreaView style={styles.container}>
-      <StatusBar />
-      {/*透過 props 將資料往下傳*/}
-      <Header title={albumData.albumTitle} /> 
-      <AlbumList list={albumData.albumList} />
-    </SafeAreaView>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={AlbumScreen} />
+        <Stack.Screen name="Detail" component={DetailScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
-const styles = StyleSheet.create({
+/*const styles = StyleSheet.create({
   container: {
     flex: 1, 
     backgroundColor: "#FFEED8",
   },
-});
+});*/
 
 export default App;
 
